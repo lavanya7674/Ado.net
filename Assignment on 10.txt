@@ -1,0 +1,113 @@
+create database work_db 
+use work_db
+create table worker
+(
+Workerid int primary key identity(1,1),
+WorkerFirst_Name varchar(100) not null,
+WorkerLast_Name varchar(100) not null,
+WorkerSalary int  not null,
+WorkerJoining Date,
+WorkerDepartement varchar(100) not null
+)
+alter table worker add WorkerSalary int;
+select * from worker
+drop table worker
+
+
+
+
+create table worker
+(
+Workerid int primary key identity(1,1),
+WorkerFirst_Name varchar(100) not null,
+WorkerLast_Name varchar(100) not null,
+WorkerSalary int  not null,
+WorkerJoining Date,
+WorkerDepartement varchar(100) not null
+)
+select * from worker
+insert worker values('Monika','Arora',100000,'02-20-2014','HR')
+
+insert worker values('Niharika','Verma',80000,'06-11-2014','Admin')
+
+insert worker values('vishal','Singhal',300000,'02-20-2014','HR')
+
+insert worker values('Amitabh','Singh',500000,'02-20-2014','Admin')
+
+insert worker values('Vivek','Bhati',500000,'06-11-2014','Admin')
+
+insert worker values('Vipul','Diwan',200000,'06-11-2014','Account')
+
+insert worker values('Satish','Kumar',75000,'01-20-2014','Account')
+
+insert worker values('Geetika','Chauhan',90000,'04-11-2014','Admin')
+
+create table bonus
+(
+Worker_Ref_ID int,
+Bonus_Date Date, 
+Bonus_Amount int
+)
+insert bonus values(1,'02-20-2016',5000)
+
+insert bonus values(2,'06-11-2016',3000)
+
+insert bonus values(3,'02-20-2016',4000)
+
+insert bonus values(1,'02-20-2016',4500)
+
+insert bonus values(1,'06-11-2016',3500)
+select * from bonus
+
+create table Title
+(
+Worker_Ref__ID int primary key identity(1,1),
+WorkerTitle varchar(100),
+WorkerJoining_Date Date
+)
+insert Title values('Manager','02-20-2016')
+insert Title values('Executive','06-11-2016')
+insert Title values('Executive','06-11-2016')
+insert Title values('Manager','06-11-2016')
+insert Title values('Executive','06-11-2016')
+insert Title values('Lead','06-11-2016')
+insert Title values('Lead','06-11-2016')
+select * from Title
+
+--# Which worker ID 500000 and more?
+select WorkerFirst_Name,WorkerLast_Name,WorkerSalary,WorkerDepartement
+from worker
+where WorkerSalary in (select max(WorkerSalary)from worker  group by  WorkerDepartement);
+
+--# How many works name starts with "vi" ?
+select WorkerFirst_Name
+from worker
+where WorkerFirst_Name Like 'vi%'order by WorkerFirst_Name
+
+
+select AVG(Workersalary),COUNT(*)
+from worker
+where WorkerDepartement='HR';
+
+select * from worker
+
+
+--Average Salary of workers joined on 2014-06-11
+select avg(Workersalary),COUNT(*)
+from worker
+where WorkerJoining='06-11-2014'; 
+
+---# Change vishal name to vimal ?
+update  worker
+set WorkerFirst_Name='vimal'
+where WorkerFirst_Name='vishal';
+select * from worker
+
+
+
+--# Delete vivek from table?
+delete from worker
+where Workerid=6;
+select * from worker
+
+
